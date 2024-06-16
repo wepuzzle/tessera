@@ -1,0 +1,21 @@
+{
+  "name": "@tessera/source",
+  "version": "1.0.0",
+  "main": "index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joan Lloret <https://github.com/juallom>",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@biomejs/biome": "1.8.1",
+    "lefthook": "^1.6.16",
+    "turbo": "^2.0.4",
+    "typescript": "^5.4.5"
+  }
+}
