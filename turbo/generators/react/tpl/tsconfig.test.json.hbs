@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": ["./tsconfig.json"],
+  "compilerOptions": {
+    "rootDir": "./",
+    "baseUrl": "./",
+    "types": ["vitest/globals", "vitest/jsdom", "@testing-library/jest-dom/vitest"]
+  },
+  "include": ["src/**", "test/**", "declarations.d.ts", "setupTests.js"]
+}

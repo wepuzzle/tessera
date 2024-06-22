@@ -9,12 +9,18 @@
       "persistent": true,
       "cache": false
     },
-    "lint": {
-      "inputs": ["src/**", "test/**", "**/*.json"]
-    },
     "test": {
       "inputs": ["src/**/*.test.ts", "test/**"],
       "outputs": ["coverage/**"]
+    },
+    "test:watch": {
+      "inputs": ["src/**/*.test.ts", "test/**"],
+      "cache": false,
+      "persistent": true
+    },
+    "//#lint": {},
+    "//#lint:fix": {
+      "cache": false
     }
   }
 }

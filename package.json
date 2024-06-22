@@ -1,12 +1,9 @@
 {
   "name": "@tessera/source",
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "main": "index.js",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*", "packages/*", "tools/*"],
   "packageManager": "npm@10.5.2",
   "engines": {
     "node": "^20.13.x",
@@ -19,16 +16,21 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "lint": "biome check .",
+    "lint:fix": "biome check . --write"
   },
   "author": "Joan Lloret <https://github.com/juallom>",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@biomejs/biome": "1.8.1",
+    "@tessera/config": "*",
+    "@turbo/gen": "^2.0.4",
+    "@types/lodash": "^4.17.5",
     "lefthook": "^1.6.16",
-    "turbo": "^2.0.4",
-    "typescript": "^5.4.5"
+    "lodash": "^4.17.21",
+    "plop-pack-npm-install": "^0.3.0",
+    "turbo": "^2.0.4"
   }
 }

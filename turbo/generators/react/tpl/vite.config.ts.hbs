@@ -1,0 +1,79 @@
+import react from '@vitejs/plugin-react-swc';
+import { defineConfig } from 'vite';
+import checker from 'vite-plugin-checker';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import svgr from 'vite-plugin-svgr';
+import tsconfigPaths from 'vite-tsconfig-paths';
+// import packageJson from './package.json' assert { type: 'json' };
+
+export default (() => {
+  // const { externals } = packageJson || { externals: {} };
+  // const external = Object.keys(externals);
+
+  // DEBUG
+  // for (const key of Object.keys(externals)) {
+  //   import(`${key}/package.json`, { assert: { type: 'json' } }).then(
+  //     ({ default: { version } }) => {
+  //       console.log(`${key} version: ${version}`);
+  //     },
+  //   );
+  // }
+
+  // const importMap = external.length
+  //   ? `{ "imports": {${Object.entries(externals)
+  //       .map(([key, value]) => `"${key}": "${value}"`)
+  //       .join(', ')} } }`
+  //   : '';
+
+  return defineConfig(({ mode }) => {
+    const isProd = mode === 'production';
+    return {
+      mode,
+      build: {
+        sourcemap: !isProd,
+        emptyOutDir: true,
+        assetsDir: '',
+        // rollupOptions: external
+        //   ? {
+        //       external,
+        //     }
+        //   : {},
+        terserOptions: {
+          module: true,
+          output: {
+            comments: () => false,
+          },
+          compress: {
+            drop_console: true,
+          },
+        },
+      },
+      esbuild: { legalComments: 'none' },
+      server: {
+        open: true,
+      },
+      plugins: [
+        react(),
+        svgr(),
+        tsconfigPaths(),
+        checker({
+          typescript: true,
+        }),
+        createHtmlPlugin({
+          // inject: {
+          //   data: {
+          //     importMap,
+          //   },
+          // },
+        }),
+      ],
+      test: {
+        globals: true,
+        environment: 'jsdom',
+        watch: false,
+        setupFiles: ['./setupTests.ts'],
+        include: ['src/**/?(*.)test.ts?(x)', 'test/**/?(*.)test.ts?(x)'],
+      },
+    };
+  });
+})();

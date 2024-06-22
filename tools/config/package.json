@@ -1,0 +1,13 @@
+{
+  "name": "@tessera/config",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    "./base.json": "./tsconfig/base.json",
+    "./react.json": "./tsconfig/react.json",
+    "./react.lib.json": "./tsconfig/react.lib.json"
+  },
+  "dependencies": {
+    "typescript": "^5.4.5"
+  }
+}
