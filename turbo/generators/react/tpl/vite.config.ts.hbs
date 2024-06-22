@@ -70,6 +70,9 @@ export default (() => {
       test: {
         globals: true,
         environment: 'jsdom',
+        coverage: {
+          reporter: ['json', 'html'],
+        },
         watch: false,
         setupFiles: ['./setupTests.ts'],
         include: ['src/**/?(*.)test.ts?(x)', 'test/**/?(*.)test.ts?(x)'],

@@ -1,24 +1,56 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
+    "install": {
+      "inputs": ["package.json", "package-lock.json"],
+      "outputs": ["node_modules/"]
+    },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^install", "^build"],
+      "inputs": [
+        "src/**/*.{ts,tsx}",
+        "declarations.d.ts",
+        "tsconfig.json",
+        "vite.config.ts",
+        "index.html"
+      ],
       "outputs": ["dist/**"]
     },
     "dev": {
+      "dependsOn": ["^install"],
+      "persistent": true,
+      "cache": false
+    },
+    "preview": {
+      "dependsOn": ["^install"],
       "persistent": true,
       "cache": false
     },
     "test": {
-      "inputs": ["src/**/*.test.ts", "test/**"],
+      "dependsOn": ["^test"],
+      "inputs": [
+        "src/**/*.test.{ts,tsx}",
+        "test/**",
+        "declarations.d.ts",
+        "tsconfig.test.json",
+        "vite.config.ts",
+        "setupTests.ts"
+      ],
       "outputs": ["coverage/**"]
     },
     "test:watch": {
-      "inputs": ["src/**/*.test.ts", "test/**"],
+      "dependsOn": [],
+      "inputs": ["src/**/*.test.{ts,tsx}", "test/**"],
       "cache": false,
       "persistent": true
     },
-    "//#lint": {},
+    "publish": {
+      "dependsOn": ["^install", "//#lint", "^test", "^build", "^publish"],
+      "inputs": ["dist/**", ".npmignore", "package.json", "package-lock.json"]
+    },
+    "//#lint": {
+      "inputs": ["!**/node_modules/", "**/*.{js,ts,tsx,json,jsonc,md,html}"]
+    },
     "//#lint:fix": {
       "cache": false
     }
