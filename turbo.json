@@ -3,7 +3,7 @@
   "tasks": {
     "install": {
       "inputs": ["package.json", "package-lock.json"],
-      "outputs": ["node_modules/"]
+      "outputs": []
     },
     "build": {
       "dependsOn": ["^install", "^build"],
@@ -39,7 +39,7 @@
       "outputs": ["coverage/**"]
     },
     "test:watch": {
-      "dependsOn": [],
+      "dependsOn": ["^install"],
       "inputs": ["src/**/*.test.{ts,tsx}", "test/**"],
       "cache": false,
       "persistent": true
